@@ -4,10 +4,12 @@ one:
   proveedor_id: 1
   description: MyString
   date: 2021-09-30
-  time: 2021-09-30 10:46:10
+  start-time: 2021-09-30 11:16:12
+  duration: 1
 
 two:
   proveedor_id: 1
   description: MyString
   date: 2021-09-30
-  time: 2021-09-30 10:46:10
+  start-time: 2021-09-30 11:16:12
+  duration: 1
