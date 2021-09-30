@@ -10,15 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_30_161612) do
+ActiveRecord::Schema.define(version: 2021_09_30_202244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "agendas", force: :cascade do |t|
-    t.integer "trabajo_id"
+  create_table "appointments", force: :cascade do |t|
+    t.bigint "trabajo_id", null: false
+    t.bigint "proveedor_id", null: false
+    t.date "date"
+    t.time "start_time"
+    t.time "end_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["proveedor_id"], name: "index_appointments_on_proveedor_id"
+    t.index ["trabajo_id"], name: "index_appointments_on_trabajo_id"
   end
 
   create_table "proveedors", force: :cascade do |t|
@@ -28,13 +34,11 @@ ActiveRecord::Schema.define(version: 2021_09_30_161612) do
   end
 
   create_table "trabajos", force: :cascade do |t|
-    t.integer "proveedor_id"
     t.string "description"
-    t.date "date"
-    t.time "start_time"
-    t.integer "duration"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "appointments", "proveedors"
+  add_foreign_key "appointments", "trabajos"
 end

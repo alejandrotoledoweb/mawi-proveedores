@@ -1,9 +1,7 @@
 class Trabajo < ApplicationRecord
 
-  belongs_to :proveedor
+  belongs_to :agenda
+  belongs_to :user
 
   validates :description, presence: true
-  validates :date, presence: true
-  validates :start_time, presence: true
-  validates :duration, presence: true
 end

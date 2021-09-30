@@ -1,7 +1,6 @@
 class Proveedor < ApplicationRecord
 
   validates :name, presence: true
-
-  has_many :trabajos
-  has_one :agenda, through: :trabajos
+  has_one :agenda
+  has_many :trabajos, through: :agenda
 end
