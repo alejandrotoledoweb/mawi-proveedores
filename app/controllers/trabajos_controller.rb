@@ -1,0 +1,2 @@
+class TrabajosController < ApplicationController
+end
