@@ -1,3 +1,21 @@
 class ProveedoresController < ApplicationController
 
+  def create
+    @proveedor = Proveedor.new(proveedor_aprams)
+    if @proveedor.save
+      render json: {proveedor: @proveedor.attributes}, status: :created
+    else
+      render json: {created: false, error_message: @proveedor.erros.full_messages}, status: :not_aceptable
+    end
+    
+  end
+  
+
+  private
+
+  def proveedor_params
+    params.permit(:name)
+  end
+  
+
 end
