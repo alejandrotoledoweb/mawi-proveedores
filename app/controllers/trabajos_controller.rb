@@ -5,14 +5,14 @@ class TrabajosController < ApplicationController
     if @trabajo.save
       render json: {trabajo: @trabajo.attributes}, status: :created
     else
-      render json: {created: false, error_message: @trabajo.erros.full_messages}, status: :not_aceptable
+      render json: {created: false, error_message: @trabajo.errors.full_messages}, status: :not_aceptable
     end
     
   end
 
   def index
-    @trabajos = Proveedor.all
-    render json: @trabajo, status: :ok
+    @trabajos = Trabajo.all
+    render json: @trabajos, status: :ok
   end
 
   private

@@ -6,10 +6,13 @@ class AppointmentsController < ApplicationController
   end
 
   def create
-    @appointment = Appointment.create(appointment_params)
-    return json_response(@appointment, :created) if @appointment.valid?
-
-    error_message
+    @appointment = Appointment.new(appointment_params)
+    if @appointment.start_time < @appointment.end_time
+      @appointment.save
+      return render json: @appointment, status: :created
+    else
+      return render json: @appointment.errors.full_messages, status: :unprocessable_entity
+    end
   end
 
   private
