@@ -9,6 +9,12 @@ class ProveedoresController < ApplicationController
     end
     
   end
+
+  def index
+    @proveedors = Proveedor.all
+    render json: @proveedors, status: :ok
+  end
+  
   
 
   private
