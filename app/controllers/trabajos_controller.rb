@@ -1,12 +1,12 @@
 class TrabajosController < ApplicationController
 
   def create
-    @trabajo = Trabajo.new(trabajo_params)
-    if @trabajo.save
-      render json: {trabajo: @trabajo.attributes}, status: :created
-    else
-      render json: {created: false, error_message: @trabajo.errors.full_messages}, status: :not_aceptable
-    end
+    @trabajo = Trabajo.create(trabajo_params)
+    # if @trabajo.save
+    #   render json: {trabajo: @trabajo.attributes}, status: :created
+    # else
+    #   render json: {created: false, error_message: @trabajo.errors.full_messages}, status: :not_aceptable
+    # end
     
   end
 

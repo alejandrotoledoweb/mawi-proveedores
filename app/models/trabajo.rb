@@ -1,7 +1,6 @@
 class Trabajo < ApplicationRecord
-
-  belongs_to :appointment
-  belongs_to :user
-
+  has_many :appointments
+  has_many :proveedor, through: :appointments
+  
   validates :description, presence: true
 end
