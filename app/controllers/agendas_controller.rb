@@ -1,2 +1,0 @@
-class AgendasController < ApplicationController
-end

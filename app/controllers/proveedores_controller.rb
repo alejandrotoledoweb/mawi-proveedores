@@ -1,7 +1,7 @@
 class ProveedoresController < ApplicationController
 
   def create
-    @proveedor = Proveedor.new(proveedor_aprams)
+    @proveedor = Proveedor.new(proveedor_params)
     if @proveedor.save
       render json: {proveedor: @proveedor.attributes}, status: :created
     else
@@ -14,8 +14,6 @@ class ProveedoresController < ApplicationController
     @proveedors = Proveedor.all
     render json: @proveedors, status: :ok
   end
-  
-  
 
   private
 
