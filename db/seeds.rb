@@ -19,7 +19,7 @@ end
   )
 end
 
-Appointment.create!(trabajo_id: 1, proveedor_id: 2, date: "2021-10-30", start_time: "09:00am", end_time: "10:00am")
+Appointment.create!(trabajo_id: 1, proveedor_id: 2, date: "2021-10-30", start_time: "09:00am", end_time: "12:00pm")
 
 Appointment.create!(trabajo_id: 2, proveedor_id: 1, date: "2021-10-10", start_time: "09:00am", end_time: "10:00am")
 

@@ -15,6 +15,15 @@ class AppointmentsController < ApplicationController
     @providers = Proveedor.all
     render json: @providers, status: :ok
   end
+
+  def espacio
+    @appoitnment = Appointment.find_by(proveedor_id: params[:id])
+    if @appoitnment.date != params[:date] && @appoitnment.start_time.to_s(:time) != params[:hour] && @appoitnment.end_time < params[:hour]
+      render json: {available: false}, status: :ok
+    else
+      render json: {available: true}, status: :ok
+    end
+  end
   
   private
 

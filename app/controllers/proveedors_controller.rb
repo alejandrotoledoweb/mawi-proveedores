@@ -14,13 +14,6 @@ class ProveedorsController < ApplicationController
     @proveedors = Proveedor.all
     render json: @proveedors, status: :ok
   end
-  
-  def libre_por_fecha(fecha)
-    @proveedors = Proveedor.all
-    @libres_por_fecha = @proveedors.select {|p| p.appointment.date != fecha}
-    render json: @libres_por_fecha, status: :ok
-  end
-  
 
   private
 

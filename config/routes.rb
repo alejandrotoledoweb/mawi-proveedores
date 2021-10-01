@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   
   resources :proveedors
   resources :appointments
+
+  get '/proveedor/:id/espacio/:date/:hour', to: 'appointments#espacio'
 end
