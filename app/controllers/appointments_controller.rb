@@ -29,9 +29,22 @@ class AppointmentsController < ApplicationController
     @free_proveedors = Appointment.all.filter do |p|
       p.date.to_s != params[:date]
     end
+    new_p_hash = {}
+
+    @free_proveedors.each do |p|
+      new_p_hash[:avaliable_proveedores] ||= [] 
+      new_p_hash[:avaliable_proveedores].push(
+        { 
+        proveedor_id: p.proveedor_id,
+       }
+      )
+       new_p_hash[:avaliable_proveedores].sort_by! {|pr| pr[:proveedor_id]}
+       new_p_hash[:avaliable_proveedores].uniq! {|pt| pt[:proveedor_id]}
+       new_p_hash
+    end
 
     if @free_proveedors.any?
-      render json: @free_proveedors, status: :ok
+      render json: new_p_hash, status: :ok
     else
       render json: {avaliable_proveedors: none}, status: :ok
     end
