@@ -1,10 +1,5 @@
 class AppointmentsController < ApplicationController
 
-  def index
-    @appointments = Appointments.all
-    render json: @appointments
-  end
-
   def create
     @appointment = Appointment.new(appointment_params)
     if @appointment.start_time < @appointment.end_time
@@ -15,6 +10,12 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def index
+    @appointments = Appointment.all
+    @providers = Proveedor.all
+    render json: @providers, status: :ok
+  end
+  
   private
 
   def appointment_params
