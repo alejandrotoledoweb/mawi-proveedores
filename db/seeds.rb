@@ -20,10 +20,10 @@ end
 end
 
 Appointment.create!(trabajo_id: 1, proveedor_id: 2, date: "2021-10-30", start_time: "09:00am", end_time: "12:00pm")
-Appointment.create!(trabajo_id: 2, proveedor_id: 2, date: "2021-1-14", start_time: "09:00am", end_time: "12:00pm")
+Appointment.create!(trabajo_id: 2, proveedor_id: 2, date: "2021-11-14", start_time: "09:00am", end_time: "12:00pm")
 Appointment.create!(trabajo_id: 3, proveedor_id: 2, date: "2021-11-18", start_time: "09:00am", end_time: "12:00pm")
-Appointment.create!(trabajo_id: 4, proveedor_id: 2, date: "2021-12-04", start_time: "09:00am", end_time: "12:00pm")
 Appointment.create!(trabajo_id: 4, proveedor_id: 2, date: "2021-12-04", start_time: "01:00pm", end_time: "03:00pm")
+Appointment.create!(trabajo_id: 4, proveedor_id: 2, date: "2021-12-04", start_time: "09:00am", end_time: "12:00pm")
 
 Appointment.create!(trabajo_id: 2, proveedor_id: 1, date: "2021-10-10", start_time: "09:00am", end_time: "10:00am")
 

@@ -56,6 +56,7 @@ class AppointmentsController < ApplicationController
           end_time: app.end_time
         }
       )
+      new_hash[temp].sort_by! {|ap| ap[:start_time]}
       @allAppointments[temp] = new_hash[temp]
       @allAppointments
     end
