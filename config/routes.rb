@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :trabajos
+  resources :trabajos, only: %i[create index]
   
-  resources :proveedors
-  resources :appointments
+  resources :proveedors, only: %i[create index]
+  resources :appointments, only: %i[create index]
 
-  get '/proveedor/:id/espacio/:date/:hour', to: 'appointments#espacio'
+  get '/proveedores/:id/espacio/:date/:hour', to: 'appointments#espacio'
+  get '/proveedores/free/:date', to: 'appointments#disponibles'
 end

@@ -24,6 +24,20 @@ class AppointmentsController < ApplicationController
       render json: {available: true}, status: :ok
     end
   end
+
+  def disponibles
+    @appointments = Appointment.all
+    @free_proveedors = Appointment.all.filter do |p|
+      p.date.to_s != params[:date]
+      
+    end
+    if @free_proveedors.any?
+      render json: @free_proveedors, status: :ok
+    else
+      render json: {avaliable_proveedors: none}, status: :ok
+    end
+  end
+  
   
   private
 
