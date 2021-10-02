@@ -26,27 +26,39 @@ class AppointmentsController < ApplicationController
   end
 
   def disponibles
-    @free_proveedors = Appointment.all.filter do |p|
-      p.date.to_s != params[:date]
-    end
+    @free_proveedors = Appointment.all.order(proveedor_id: :desc)
     new_p_hash = {}
 
-    @free_proveedors.each do |p|
-      new_p_hash[:avaliable_proveedores] ||= [] 
-      new_p_hash[:avaliable_proveedores].push(
-        { 
-        proveedor_id: p.proveedor_id,
-       }
+    temp_array = []
+    @free_proveedors.select{|ap| ap[:date].to_s.include?(params[:date].to_s)}.map do |p|
+      temp_array.push(
+        p.proveedor_id
       )
-       new_p_hash[:avaliable_proveedores].sort_by! {|pr| pr[:proveedor_id]}
-       new_p_hash[:avaliable_proveedores].uniq! {|pt| pt[:proveedor_id]}
-       new_p_hash
+      temp_array.uniq!
+      temp_array.sort!
     end
+
+    @prov_all = Proveedor.all.order(id: :asc)
+
+    @prov_all.map do |pr|
+      if !temp_array.include?(pr.id)
+        new_p_hash[:avaliable_proveedores] ||= [] 
+        new_p_hash[:avaliable_proveedores].push(
+          { 
+          proveedor_id: pr.id,
+          proveedor: pr.name,
+        }
+        )
+        new_p_hash
+      end
+    end
+
+
 
     if @free_proveedors.any?
       render json: new_p_hash, status: :ok
     else
-      render json: {avaliable_proveedors: none}, status: :ok
+      render json: {avaliable_proveedors: "none"}, status: :ok
     end
   end
 
