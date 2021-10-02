@@ -91,14 +91,26 @@ class AppointmentsController < ApplicationController
   end
 
   def hours
-    @appointmentsInOrder = Appointment.all.order(date: :desc)
-    @filted_app = @appointmentsInOrder.filter do |a|
-      a.proveedor_id = params[:id]
-      a.date = params[:date]
+    @appointmentsInOrder = Appointment.all.order(id: :desc)
+
+    temp_array = []
+    @appointmentsInOrder.select{|ap| ap[:date].to_s[0..6].eql?(params[:date][0..6]) && ap.proveedor_id.to_s == params[:id]}.map do |p|
+      temp_array.push(
+        (p.end_time  - p.start_time)/3600
+      )
+      temp_array.sort!
     end
 
+    totalOfHours = temp_array.reduce(:+)
+    date_calculated = params[:date][0..6]
 
-    render json: @appointmentsInOrder, status: :ok
+    total = { 
+      "total_hours" => totalOfHours,
+      "month" => date_calculated
+     }
+
+
+    render json: total, status: :ok
     
   end
   
