@@ -18,10 +18,10 @@ class AppointmentsController < ApplicationController
 
   def espacio
     @appoitnment = Appointment.find_by(proveedor_id: params[:id])
-    if @appoitnment.date != params[:date] && @appoitnment.start_time.to_s(:time) != params[:hour] && @appoitnment.end_time < params[:hour]
-      render json: {available: false}, status: :ok
-    else
+    if @appoitnment.date != params[:date] && @appoitnment.start_time.to_s(:time) != params[:hour] && @appoitnment.end_time.to_s(:time) < params[:hour]
       render json: {available: true}, status: :ok
+    else
+      render json: {available: false}, status: :ok
     end
   end
 
@@ -51,8 +51,8 @@ class AppointmentsController < ApplicationController
   end
 
   def allAppointments
-    @appointments = Appointment.all.order(date: :desc)
-    @supporteById = @appointments.filter do |p|
+    @appointments_all = Appointment.all.order(date: :desc)
+    @supporteById = @appointments_all.filter do |p|
       p.proveedor_id = params[:id]
     end
     @allAppointments = {}
@@ -77,8 +77,18 @@ class AppointmentsController < ApplicationController
       render json: @allAppointments, status: :ok
     
   end
-  
-  
+
+  def hours
+    @appointmentsInOrder = Appointment.all.order(date: :desc)
+    @filted_app = @appointmentsInOrder.filter do |a|
+      a.proveedor_id = params[:id]
+      a.date = params[:date]
+    end
+
+
+    render json: @appointmentsInOrder, status: :ok
+    
+  end
   
   private
 
