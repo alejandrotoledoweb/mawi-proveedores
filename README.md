@@ -1,7 +1,7 @@
 # Mawi Challenge - Ruby on Rails Project 
 
 This project was part of a process at Mawi.
-This object of the project was to handle information about providers, jobs and one agenda or appointments for each provider.
+This object of the project was to handle information about providers, jobs and one agenda or appointment for each provider.
 
 # Requirements for the Information
 
@@ -19,7 +19,7 @@ This object of the project was to handle information about providers, jobs and o
 
 1. Create an endpoint to validate if a provider has space for X date and X time.
 2. Create an endpoint to get all the providers available on X date.
-3. Create an endpoint that returns the jobs of a provider separated by days and ordered descending by hour and day
+3. Create an endpoint that returns the jobs of a provider separated by days and ordered descending by an hour and day
 4. An endpoint that returns the number of hours that a provider has scheduled per month.
 
 ## Solution 
