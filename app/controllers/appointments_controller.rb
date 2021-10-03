@@ -64,12 +64,14 @@ class AppointmentsController < ApplicationController
 
   def allAppointments
     @appointments_all = Appointment.all.order(date: :desc)
-    @supporteById = @appointments_all.filter do |p|
-      p.proveedor_id = params[:id]
-    end
+    # @supporteById = @appointments_all.filter do |p|
+    #   p.proveedor_id = params[:id]
+    # end
     @allAppointments = {}
     new_hash = {}
-    @supporteById.each do |app|
+
+    @appointments_all.select{|ap| ap.proveedor_id.to_s == params[:id]}.map do |app|
+    # @supporteById.each do |app|
       temp = app.date
       new_hash[temp] ||= []
       new_hash[temp].push(
