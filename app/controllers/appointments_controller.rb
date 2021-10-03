@@ -2,16 +2,16 @@ class AppointmentsController < ApplicationController
 
   def create
     @appointment = Appointment.new(appointment_params)
-    check = true
+    check = []
     @appointments_all = Appointment.all.select{|ap| ap.date.to_s(:time) == @appointment.date}.map do |ap|
-      if ap.start_time != @appointment.start_time && ap.end_time <  @appointment.end_time 
-        check true
+      if ap.start_time = @appointment.start_time && ap.end_time >=  @appointment.end_time && ap.start_time < @appointment.start_time 
+        chec.push(false)
       else
-        check false
+        check.push(true)
       end
       check
     end
-    if check
+    if !check.include?(false)
       @appointment.save
       return render json: @appointment, status: :created
     else
@@ -27,7 +27,7 @@ class AppointmentsController < ApplicationController
 
   def espacio
     @appoitnment = Appointment.find_by(proveedor_id: params[:id])
-    if @appoitnment.date != params[:date] && @appoitnment.start_time.to_s(:time) != params[:hour] && @appoitnment.end_time.to_s(:time) <= params[:hour]
+    if @appoitnment.date != params[:date] && @appoitnment.start_time.to_s(:time) != params[:hour] &&  @appoitnment.start_time.to_s(:time) > params[:hour] && @appoitnment.end_time.to_s(:time) <= params[:hour]
       render json: {available: true}, status: :ok
     else
       render json: {available: false}, status: :ok
