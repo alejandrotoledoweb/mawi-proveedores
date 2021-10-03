@@ -27,7 +27,7 @@ class AppointmentsController < ApplicationController
 
   def espacio
     @appoitnment = Appointment.find_by(proveedor_id: params[:id])
-    if @appoitnment.date != params[:date] && @appoitnment.start_time.to_s(:time) != params[:hour] && @appoitnment.end_time.to_s(:time) < params[:hour]
+    if @appoitnment.date != params[:date] && @appoitnment.start_time.to_s(:time) != params[:hour] && @appoitnment.end_time.to_s(:time) <= params[:hour]
       render json: {available: true}, status: :ok
     else
       render json: {available: false}, status: :ok
