@@ -2,7 +2,16 @@ class AppointmentsController < ApplicationController
 
   def create
     @appointment = Appointment.new(appointment_params)
-    if @appointment.start_time < @appointment.end_time
+    check = true
+    @appointments_all = Appointment.all.select{|ap| ap.date.to_s(:time) == @appointment.date}.map do |ap|
+      if ap.start_time != @appointment.start_time && ap.end_time <  @appointment.end_time 
+        check true
+      else
+        check false
+      end
+      check
+    end
+    if check
       @appointment.save
       return render json: @appointment, status: :created
     else
