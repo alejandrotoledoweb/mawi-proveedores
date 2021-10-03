@@ -24,6 +24,10 @@ This object of the project was to handle information about providers, jobs and o
 
 ## Solution 
 
+## Live demo link
+
+[try the live demo link](https://mawi-app.herokuapp.com/)
+
 ### Formats of the entries in the endpoints
 
 
