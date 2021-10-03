@@ -3,19 +3,19 @@ class AppointmentsController < ApplicationController
   def create
     @appointment = Appointment.new(appointment_params)
     check = []
-    @appointments_all = Appointment.all.select{|ap| ap.date.to_s(:time) == @appointment.date}.map do |ap|
-      if ap.start_time = @appointment.start_time && ap.end_time >=  @appointment.end_time && ap.start_time < @appointment.start_time 
-        chec.push(false)
+    @appointments_all = Appointment.all.select{|ap| ap.date === @appointment.date}.map do |ap|
+      if @appointment.start_time >= ap.start_time && @appointment.start_time <= ap.end_time 
+        check.push(false)
       else
         check.push(true)
       end
       check
     end
-    if !check.include?(false)
+    if check.include?(false)
+      return render json: check, status: :unprocessable_entity
+    else
       @appointment.save
       return render json: @appointment, status: :created
-    else
-      return render json: @appointment.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -26,12 +26,22 @@ class AppointmentsController < ApplicationController
   end
 
   def espacio
-    @appoitnment = Appointment.find_by(proveedor_id: params[:id])
-    if @appoitnment.date != params[:date] && @appoitnment.start_time.to_s(:time) != params[:hour] &&  @appoitnment.start_time.to_s(:time) > params[:hour] && @appoitnment.end_time.to_s(:time) <= params[:hour]
-      render json: {available: true}, status: :ok
-    else
-      render json: {available: false}, status: :ok
+    check_free = []
+    @appoitnment = Appointment.all.select{|ap| ap.proveedor_id === params[:id]}.map do |app|
+      if app.date != params[:date] && app.start_time.to_s(:time) != params[:hour] && app.start_time.to_s(:time) > params[:hour] && app.end_time.to_s(:time) <= params[:hour]
+        check_free.push(true)
+      else
+        check_free.psuh(false)
+      end
+      check_free
     end
+
+    if !check_free.include?(false)
+      render json: { available: true}, status: :ok
+    else
+      render json: {error: "id not fount"}, status: :not_found
+    end
+
   end
 
   def disponibles
