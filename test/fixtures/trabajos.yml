@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  proveedor_id: 1
+  description: MyString
+  date: 2021-09-30
+  start-time: 2021-09-30 11:16:12
+  duration: 1
+
+two:
+  proveedor_id: 1
+  description: MyString
+  date: 2021-09-30
+  start-time: 2021-09-30 11:16:12
+  duration: 1

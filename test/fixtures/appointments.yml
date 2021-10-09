@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  trabajo: one
+  proveedor: one
+  date: 2021-09-30
+  start_time: 2021-09-30 15:22:44
+  end_time: 2021-09-30 15:22:44
+
+two:
+  trabajo: two
+  proveedor: two
+  date: 2021-09-30
+  start_time: 2021-09-30 15:22:44
+  end_time: 2021-09-30 15:22:44
