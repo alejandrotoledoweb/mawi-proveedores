@@ -2,11 +2,20 @@ class AppointmentsController < ApplicationController
 
   def create
     @appointment = Appointment.new(appointment_params)
-    if @appointment.start_time < @appointment.end_time
+    check = []
+    @appointments_all = Appointment.all.select{|ap| ap.date === @appointment.date}.map do |ap|
+      if @appointment.start_time >= ap.start_time && @appointment.start_time <= ap.end_time 
+        check.push(false)
+      else
+        check.push(true)
+      end
+      check
+    end
+    if check.include?(false)
+      return render json: check, status: :unprocessable_entity
+    else
       @appointment.save
       return render json: @appointment, status: :created
-    else
-      return render json: @appointment.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -17,12 +26,22 @@ class AppointmentsController < ApplicationController
   end
 
   def espacio
-    @appoitnment = Appointment.find_by(proveedor_id: params[:id])
-    if @appoitnment.date != params[:date] && @appoitnment.start_time.to_s(:time) != params[:hour] && @appoitnment.end_time.to_s(:time) < params[:hour]
-      render json: {available: true}, status: :ok
-    else
-      render json: {available: false}, status: :ok
+    check_free = []
+    @appoitnment = Appointment.all.select{|ap| ap.proveedor_id === params[:id]}.map do |app|
+      if app.date != params[:date] && app.start_time.to_s(:time) != params[:hour] && app.start_time.to_s(:time) > params[:hour] && app.end_time.to_s(:time) <= params[:hour]
+        check_free.push(true)
+      else
+        check_free.psuh(false)
+      end
+      check_free
     end
+
+    if !check_free.include?(false)
+      render json: { available: true}, status: :ok
+    else
+      render json: {error: "id not fount"}, status: :not_found
+    end
+
   end
 
   def disponibles
@@ -64,12 +83,10 @@ class AppointmentsController < ApplicationController
 
   def allAppointments
     @appointments_all = Appointment.all.order(date: :desc)
-    @supporteById = @appointments_all.filter do |p|
-      p.proveedor_id = params[:id]
-    end
     @allAppointments = {}
     new_hash = {}
-    @supporteById.each do |app|
+
+    @appointments_all.select{|ap| ap.proveedor_id.to_s == params[:id]}.map do |app|
       temp = app.date
       new_hash[temp] ||= []
       new_hash[temp].push(
@@ -109,8 +126,11 @@ class AppointmentsController < ApplicationController
       "month" => date_calculated
      }
 
-
-    render json: total, status: :ok
+    if !temp_array.empty?
+      render json: total, status: :ok
+    else
+      render json: {hours: "not found any information"}, status: :ok
+    end
     
   end
   

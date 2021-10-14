@@ -6,8 +6,11 @@ This object of the project was to handle information about providers, jobs and o
 # Requirements for the Information
 
 • You must have registered providers.
+
 • Each provider can have "jobs" assigned.
+
 • Each job generates a lock in the supplier's agenda.
+
 • It is distributed by hours and by date.
 
 ## This is the ERD made for this project
@@ -23,6 +26,10 @@ This object of the project was to handle information about providers, jobs and o
 4. An endpoint that returns the number of hours that a provider has scheduled per month.
 
 ## Solution 
+
+## Live demo link
+
+[try the live demo link](https://mawi-app.herokuapp.com/)
 
 ### Formats of the entries in the endpoints
 
