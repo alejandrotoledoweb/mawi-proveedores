@@ -41,6 +41,7 @@ time format: `%H:%M` - Example: `13:00`
 ### 1. End Point -  get `/proveedores/:id/espacio/:date/:hour`
 
 
+
 ![screenshot](app/assets/solution-1.png)
 
 
@@ -67,19 +68,16 @@ time format: `%H:%M` - Example: `13:00`
 - Ruby on Rails 6.1.4.1
 - Postgres: >=9.5
 
-## Live demo link
-
-Visit the live demo [link]()
-
 ## Setup
 
 Download the repo with this command
 
 `git clone git@github.com:alejandrotoledoweb/mawi-proveedores.git`
 
+`cd mawi-proveedores`
+
 `git checkout feature-app-mawi`
 
-`cd mawi-proveedores`
 
 
 Install the Gems and Dependencies

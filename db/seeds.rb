@@ -42,4 +42,6 @@ Appointment.create!(trabajo_id: 9, proveedor_id: 9, date: "2021-11-26", start_ti
 
 Appointment.create!(trabajo_id: 10, proveedor_id: 1, date: "2021-10-30", start_time: "09:00", end_time: "10:00")
 
+Appointment.create!(trabajo_id: 10, proveedor_id: 1, date: "2021-10-30", start_time: "09:00", end_time: "10:00")
+
 Appointment.create!(trabajo_id: 1, proveedor_id: 1, date: "2021-10-30", start_time: "13:00", end_time: "15:00")
