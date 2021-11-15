@@ -6,8 +6,11 @@ This object of the project was to handle information about providers, jobs and o
 # Requirements for the Information
 
 • You must have registered providers.
+
 • Each provider can have "jobs" assigned.
+
 • Each job generates a lock in the supplier's agenda.
+
 • It is distributed by hours and by date.
 
 ## This is the ERD made for this project
