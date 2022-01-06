@@ -70,10 +70,6 @@ time format: `%H:%M` - Example: `13:00`
 - Ruby on Rails 6.1.4.1
 - Postgres: >=9.5
 
-## Live demo link
-
-Visit the live demo [link]()
-
 ## Setup
 
 Download the repo with this command
